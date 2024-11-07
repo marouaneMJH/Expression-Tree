@@ -1,0 +1,20 @@
+# Define the source files and the executable name
+# SRC = $(wildcard src/*.c)
+SRC = $(shell find src -name "*.c")
+EXEC = repMathExp
+
+# Default target to build the application
+all: $(EXEC)
+
+# Compile the C program
+$(EXEC): $(SRC)
+	gcc -o $(EXEC) $(SRC) && ./$(EXEC)
+
+# Run the compiled application
+run: all
+	./$(EXEC)
+	
+
+# Clean up the compiled files
+clean:
+	rm -f $(EXEC)
