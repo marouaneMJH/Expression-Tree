@@ -3,7 +3,7 @@
 
 
 typedef struct cel{
-    int iVal; // la valeur de la cellule (c'est un feuille)
+    float iVal; // la valeur de la cellule (c'est un feuille)
     char cOp; // l'opération par defaut est '@'(c'est un feuille) sinon c'est un Noeud
     struct cel *filsG;
     struct cel *filsD;

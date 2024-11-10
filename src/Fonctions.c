@@ -15,24 +15,26 @@ float Convert_String_Reel(char cExp[],int Ind){
     // parcourir jusqua un caractere difirent de nombre 
     while((cExp[Ind]>='0') && (cExp[Ind] <='9')){
             fNbAvanVerg*=10;    // 12->120
-            fNbAvanVerg+=(-'0'); // 120 -> 123
+            fNbAvanVerg+=(cExp[Ind]-'0'); // 120 -> 123
             Ind++;
     };
     
     // si le caractère est '.' alors on doit lire les caractères après la vergule    
     if(cExp[Ind]=='.'){
+        Ind++;
         int i=0; // une countour  pour les caractères après la vergule
         while((cExp[Ind]>='0') && (cExp[Ind] <='9')){
             fNbApreVerg*=10;                // 12->120
             fNbApreVerg+=(cExp[Ind]-'0');   // 120 -> 123
             Ind++;
+            i++;
         };
         fNbApreVerg=((float)fNbApreVerg/pow(10,i)); // pour avoir le nombre réel dans le cas de nombre après la vergule
     }
 
     fNbAvanVerg+=fNbApreVerg; // le nombre total    
 
-
+    
     return ((float)fNbAvanVerg);
 }
 
@@ -56,12 +58,13 @@ int Lire_exp(char cExp[]){
     int ind=0; // indice de la chaine
     cTmp=getchar();
     while(cTmp!='\n'){  // lire jusqu'à la fin de la ligne
-        cExp[ind]=cTmp; // ajouter le caractère dans la chaine
+        cExp[ind++]=cTmp; // Insérer puis incrémenter
         cTmp=getchar(); 
     }
-    cExp[ind]='\0'; // fin de la chaine
+    cExp[ind]='\0'; // fin de chaîne
     return ((int)ind); // returner la taille de la chaine
 }
+
 Cellule* Cree_Arbre(char cExp[],int iDeb,int iFin){
     Cellule *pRacine;
     
@@ -88,10 +91,8 @@ Cellule* Cree_Arbre(char cExp[],int iDeb,int iFin){
     }
     
     // si la chaine est un nombre
-    
     pRacine=Cree_Cellule();
-    pRacine->cOp='@';
-    pRacine->iVal=Convert_String_Reel(cExp,iDeb);
+    pRacine->iVal = Convert_String_Reel(cExp, iDeb);
     return (Cellule*)(pRacine);
 }
 
