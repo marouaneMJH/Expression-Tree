@@ -62,7 +62,6 @@ int Lire_exp(char cExp[]){
     cExp[ind]='\0'; // fin de la chaine
     return ((int)ind); // returner la taille de la chaine
 }
-
 Cellule* Cree_Arbre(char cExp[],int iDeb,int iFin){
     Cellule *pRacine;
     
